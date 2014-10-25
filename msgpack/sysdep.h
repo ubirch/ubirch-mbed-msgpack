@@ -41,7 +41,11 @@ typedef unsigned __int64 uint64_t;
 typedef long _msgpack_atomic_counter_t;
 #define _msgpack_sync_decr_and_fetch(ptr) InterlockedDecrement(ptr)
 #define _msgpack_sync_incr_and_fetch(ptr) InterlockedIncrement(ptr)
-#elif defined(__MBED__)
+#elif !defined(__CC_ARM) && defined(__GNUC__) && ((__GNUC__*10 + __GNUC_MINOR__) > 40)
+typedef unsigned int _msgpack_atomic_counter_t;
+#define _msgpack_sync_decr_and_fetch(ptr) __sync_sub_and_fetch(ptr, 1)
+#define _msgpack_sync_incr_and_fetch(ptr) __sync_add_and_fetch(ptr, 1)
+#else
 #define _msgpack_atomic_counter_header "cmsis.h"
 typedef unsigned int _msgpack_atomic_counter_t;
 static inline int _msgpack_sync_decr_and_fetch(volatile _msgpack_atomic_counter_t* ptr)
@@ -62,12 +66,6 @@ static inline int _msgpack_sync_incr_and_fetch(volatile _msgpack_atomic_counter_
     __enable_irq();
     return r;
 }
-#elif defined(__GNUC__) && ((__GNUC__*10 + __GNUC_MINOR__) < 41)
-#define _msgpack_atomic_counter_header "gcc_atomic.h"
-#else
-typedef unsigned int _msgpack_atomic_counter_t;
-#define _msgpack_sync_decr_and_fetch(ptr) __sync_sub_and_fetch(ptr, 1)
-#define _msgpack_sync_incr_and_fetch(ptr) __sync_add_and_fetch(ptr, 1)
 #endif
 
 #ifdef _WIN32
