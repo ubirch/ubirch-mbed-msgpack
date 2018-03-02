@@ -1,0 +1,16 @@
+{
+  "name": "ubirch-mbed-msgpack",
+  "version": "1.0.0",
+  "description": "mbed compatible msgpack implementation",
+  "keywords": [
+    "msgpack"
+  ],
+  "author": "Matthias L. Jugel <matthias.jugel@ubirch.com>",
+  "homepage": "https://github.com/ubirch/ubirch-mbed-msgpack",
+  "repository": {
+    "url": "git@github.com:ubirch/ubirch-mbed-msgpack.git",
+    "type": "git"
+  },
+  "license": "Apache 2.0",
+  "dependencies": {}
+}
