@@ -15,6 +15,13 @@
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
  */
+
+/*!
+ * modified for esp32 support by Waldemar Gruenwald
+ * waldemar.gruenwald@ubirch.com
+ */
+
+
 #ifndef MSGPACK_VREFBUFFER_H__
 #define MSGPACK_VREFBUFFER_H__
 
