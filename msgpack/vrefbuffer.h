@@ -15,20 +15,35 @@
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
  */
+
+/*!
+ * modified for esp32 support by Waldemar Gruenwald
+ * waldemar.gruenwald@ubirch.com
+ */
+
+
 #ifndef MSGPACK_VREFBUFFER_H__
 #define MSGPACK_VREFBUFFER_H__
 
 #include "zone.h"
 #include <stdlib.h>
 
-#if !defined(_WIN32) && !defined(__MBED__)
+
+#if !defined(_WIN32) && !defined(__MBED__) && !defined(__ESP32__)
 #include <sys/uio.h>
+
+#else
+
+#if defined(__ESP32__)
+#include <lwip/sockets.h>
+
 #else
 struct iovec {
 	void  *iov_base;
 	size_t iov_len;
 };
-#endif
+#endif /* defined(__ESP32__) */
+#endif /* !defined(_WIN32) && !defined(__MBED__) && !defined(__ESP32__) */
 
 #ifdef __cplusplus
 extern "C" {
