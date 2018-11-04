@@ -29,12 +29,12 @@
 #include <stdlib.h>
 
 
-#if !defined(_WIN32) && !defined(__MBED__) && !defined(__ESP32__)
+#if !defined(_WIN32) && !defined(__MBED__) && !defined(ESP_PLATFORM)
 #include <sys/uio.h>
 
 #else
 
-#if defined(__ESP32__)
+#if defined(ESP_PLATFORM)
 #include <lwip/sockets.h>
 
 #else
@@ -42,8 +42,8 @@ struct iovec {
 	void  *iov_base;
 	size_t iov_len;
 };
-#endif /* defined(__ESP32__) */
-#endif /* !defined(_WIN32) && !defined(__MBED__) && !defined(__ESP32__) */
+#endif /* defined(ESP_PLATFORM) */
+#endif /* !defined(_WIN32) && !defined(__MBED__) && !defined(ESP_PLATFORM) */
 
 #ifdef __cplusplus
 extern "C" {
